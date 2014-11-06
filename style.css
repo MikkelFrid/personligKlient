@@ -6,7 +6,7 @@
 }
 .calendarbody {
 	width: 90%;
-	height: 75%;
+	height: 900px;
 	min-height: 500px;
 	margin: 30px 5%;
 	text-align: center;
@@ -27,7 +27,7 @@
 	padding: 0 10px 0 0;
 	font-size: 13px;
 	position: relative;
-	height: 6.1%;
+	height: 6.6667%;
 }
 .timebody .time:last-child {
 	border-bottom: 1px solid #ddd;
@@ -39,6 +39,7 @@
 	text-align: center;
 	border-left: 1px solid #ddd;
 	height: 100%;
+	position: relative;
 
 	-webkit-transition: width .2s ease-out;
 	-moz-transition: width .2s ease-out;
@@ -54,7 +55,7 @@
 	padding: 0 10px 0 0;
 	font-size: 16px;
 	position: relative;
-	height: 6.1%;
+	height: 6.6667%;
 	background: url(gfx/halfHourDivider.png) center center repeat-x;
 }
 .highlight {
@@ -64,7 +65,17 @@
 	line-height: 36px;
 	background: none;
 }
+.event {
+	 background-color: red; width: 100%; z-index:99; position: absolute;
+}
 
+.starttime {
+	display: none;
+}
+
+.duration {
+	display: none;
+}
 /* iPhone Portrait */
 @media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
 }

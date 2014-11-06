@@ -6,13 +6,18 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<h1></h1>
-<input type="button" id="prevWeekId" value="prevWeek" onClick="self.location='?name=prevWeek&week=<?= $_SESSION['cal_data']['weekLocation']; ?>'">
-<input type="button" id="nextWeekId" value="nextWeek" onClick="self.location='?name=nextWeek&week=<?= $_SESSION['cal_data']['weekLocation']; ?>'">
-
 <!-- Header med ugenummer  -->
 <div class="header">
   <h1>Week</h1>
+
+  Vi skal have en time tirsdag fra 8:40 til 9:30
+
+  900 min samlet
+
+  for hver time er der en højde på 6.6667% / 60 px.
+  Hvert enkelte mintur er i højden: 1px.
+
+ 
 </div>
 
 <!-- indeholde kalendarmodul -->
@@ -53,7 +58,12 @@
     <div class="weekday"></div>
     <div class="weekday"></div>
   </div>
+
   <div class="weekdaybody">
+    <div class="event" style="top: 120px; height: 120px;">
+        <span class="starttime">60</span>
+        <span class="duration">120</span>
+    </div>
     <div class="weekday">Tirsdag</div>
     <div class="weekday"></div>
     <div class="weekday"></div>
