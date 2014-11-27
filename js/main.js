@@ -14,7 +14,7 @@ $( document ).ready(function() {
 
 				$(this).css({
 					"display" : "block", 
-					"width"   : "93%"
+					"width"   : "85%"
 				});
 				break;
 
@@ -25,12 +25,12 @@ $( document ).ready(function() {
 
 				$(".weekdaybody").css({
 					"display" : "block", 
-					"width"   : "12.6%"
+					"width"   : "13%"
 				});
 				break;
 		}
 	});
-
+/*
 	// Event 
 	var eventJson = $.parseJSON('{"activityid":"BINTO1067U_LA_E14","eventid":"BINTO1067U_LA_E14_714ff8c1a1d8f5e918829fef3ff92a0f_23e125dbca8f1d6655b7a40a77481a82","type":"Exercise","title":"BINTO1067U.LA_E14","description":"Distribuerede systemer (LA)","start":["2014",8,"15","8","00"],"end":["2014",8,"15","9","40"],"location":"SP213"}');
 	//console.log(eventJson.description);
@@ -51,6 +51,6 @@ $( document ).ready(function() {
 	console.log(startPos);
 	console.log(endPos);
 	console.log(duration);
-
+*/
 });
 

@@ -1,71 +1,657 @@
-<style>
-.header {
-	width: 90%;
-	margin: 30px 5%;
-	text-align: center;
-}
-.calendarbody {
-	width: 90%;
-	height: 75%;
-	min-height: 500px;
-	margin: 30px 5%;
-	text-align: center;
-	background: #fff;
-	overflow: hidden;
-}
-.timebody {
-	color: #333;
-	width: 5%;
-	float: left;
-	text-align: right;
-	border-left: 1px solid #ddd;
-	height: 100%;
-	min-width: 45px;
-}
-.timebody .time {
-	margin-bottom: 1px;
-	padding: 0 10px 0 0;
-	font-size: 13px;
-	position: relative;
-	height: 6.1%;
-}
-.timebody .time:last-child {
-	border-bottom: 1px solid #ddd;
-}
-.weekdaybody {
-	background: #fff;
-	width: 12.6%;
-	float: left;
-	text-align: center;
-	border-left: 1px solid #ddd;
-	height: 100%;
+/* --- BASIC START --- */
+	body{
+		margin:0;
+	}
 
-	-webkit-transition: width .2s ease-out;
-	-moz-transition: width .2s ease-out;
-	-o-transition: width .2s ease-out;
-	transition: width .2s ease-out;
+	h1, h2{
+		color: #c24033;
+		font-weight: 500;
+	}
+
+	h2{
+		font-size: 20px;
+		margin: 20px 0px 0px;
+	}
+
+	.header {
+		width: 100%;
+		height: 120px;
+		line-height: 120px;
+		text-align: center;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 40px;
+		background: #ff4c38;
+		color:#fff;
+	}
+	.sidebar {
+		width: 15%;
+		float:left;
+		height: 900px;
+		margin: 4px 0px 0px 0px;
+		text-align: center;
+		background: #fff;
+		overflow: hidden;
+		font-family: 'Open Sans', sans-serif;
+	}	
+	.calendarbody {
+		width: 85%;
+		height: 900px;
+		min-height: 500px;
+		margin: 30px 0px 50px 0px;
+		text-align: center;
+		background: #fff;
+		overflow: hidden;
+		font-family: 'Open Sans', sans-serif;
+	}
+	.timebody {
+		color: #333;
+		width: 3%;
+		float: left;
+		text-align: right;
+		height: 100%;
+		min-width: 50px;
+	}
+	.timebody .time {
+		margin-bottom: 1px;
+		padding: 0 10px 0 0;
+		font-size: 13px;
+		position: relative;
+		height: 58px;
+	}
+	.timebody .time:last-child {
+		border-bottom: 1px solid #ddd;
+	}
+	.weekdaybody {
+		background: #fff;
+		width: 13%;
+		float: left;
+		text-align: center;
+		height: 100%;
+		position: relative;
+		cursor: pointer;
+
+		-webkit-transition: width .2s ease-out;
+		-moz-transition: width .2s ease-out;
+		-o-transition: width .2s ease-out;
+		transition: width .2s ease-out;
+	}
+	.weekdaybody:last-child {
+		border-right: 1px solid #ddd;
+	}
+	.weekdaybody .weekday {
+		color: #c24033;
+		border-bottom: 1px solid #ddd;
+		border-left: 1px solid #ddd;
+		font-size: 16px;
+		position: relative;
+		height: 59px;
+		text-transform: uppercase;
+		background: url(gfx/halfHourDivider.png) center center repeat-x;
+	}
+	.date {
+		font-size: 12px;
+		font-weight: 600;
+	}
+	.highlight {
+		background: #ededed !important;
+	}
+
+	.event {
+		 background-color: #c0392b; width: 100%; z-index:99; position: absolute;
+	}
+
+	.event-header {
+		width:100%;
+		background: rgba(255,255,255,0.2);
+		height: 20px;
+		color: #fff;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.event-course {
+		color: #fff;
+		font-size: 15px;
+		line-height: 28px;
+	}
+
+	.event-type {
+		color: #fff;
+		font-size: 13px;
+		line-height: 16px;
+	}
+
+	.event-location {
+		color: #fff;
+		bottom: 2px;
+		position: absolute;
+		right: 5px;
+		font-size: 12px;
+	}
+
+	.starttime {
+		display: none;
+	}
+
+	.duration {
+		display: none;
+	}
+	.no-bg{
+		background: none !important;
+		border-left: none !important;
+	}
+
+	.footer {
+		position:fixed;
+		bottom:0;
+		left:0;
+		height:30px;
+		background: #f5f5f5 ;
+		color: #999;
+		width: 100%;
+		line-height: 30px;
+		text-align: center;
+	}
+
+	.add-event /*form*/ {
+		font-size: 17px;
+		font-family: 'Open Sans', sans-serif;
+	}
+
+	.add-event input, select /*form*/ {
+		font-size: 17px;
+		width: 100%;
+		padding: 14px 0px 14px 10px;
+		color: #777;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+	}
+
+	.add-event .submit /*form*/ {
+		background: #ff4c38;
+		color: #fff;
+	}	
+
+	.add-event .date {
+		width: 45%;
+		padding: 14px 0px 14px 3px;
+	}
+	
+	.add-event .time {
+		width: 25%;
+		padding: 14px 0px 14px 3px;
+	}
+
+	.add-event .select {
+		width: 70%;
+	}	
+
+	.add-event span {
+		width: 24%;
+		float: left;
+		background: #fff;
+		padding: 15px 3% 15px;
+		color: #777;
+	}
+
+	.add-event .seperator {
+		border-bottom: 1px solid #e6e6e6;
+	}
+
+/* --- BASIC SLUT --- */
+
+/* --- MENU LEFT START --- */
+	.settings-button {
+		background: url(gfx/settings.png) no-repeat;
+		height: 27px;
+		width: 40px;
+		cursor: pointer;
+		margin: 45px;	
+		float:left;
+		position: absolute;
+	}
+
+	.settings-button-back {
+		background: url(gfx/settings.png) no-repeat;
+		height: 27px;
+		width: 40px;
+		cursor: pointer;
+		margin: 45px;	
+		float: right;
+		z-index: 9999999;
+		position: relative;
+	}	
+
+	.addEvent-button {
+		background: url(gfx/settings2.png) repeat;
+		height: 27px;
+		width: 40px;
+		cursor: pointer;
+		margin: 45px;	
+		right: 0;
+		position: absolute;	
+	}
+
+	.addEvent-button-back {
+		background: url(gfx/settings2.png) repeat;
+		height: 27px;
+		width: 40px;
+		cursor: pointer;
+		margin: 45px;	
+		float: left;
+		z-index: 9999999;
+		position: relative;
+	}
+
+	.menu-inner-left {
+		height: 100%;
+		width: 86%;
+		padding: 7%;
+		background: #f0eff5;
+		font-family: 'Open Sans', sans-serif;
+	}
+
+	.menu-inner-left h1, h2 {
+		font-family: 'Open Sans', sans-serif;
+	}	
+
+	.menu-inner-right {
+		height: 100%;
+		width: 100%;
+		padding: 7% 0;
+		background: #f0eff5;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 45px;
+	}	
+
+	.cbp-spmenu {
+		background: #fff;
+		position: fixed;
+		width: 340px;
+		height: 100%;
+		top: 0;
+		z-index: 1000;
+		border-right: 1px solid #ccc;
+		border-left: 1px solid #ccc;
+	}
+
+	.cbp-spmenu-top {
+		background: #ff4c38;
+		position: relative;
+		width: 60%;
+		border-left: 1px solid #ff4c38;
+		border-right: 1px solid #ff4c38;
+		font-family: 'Open Sans', sans-serif;
+		color: #fff;
+		font-size: 22px;
+		padding: 0px 20%;
+		height: 120px;
+		line-height: 120px;
+	}
+
+	.cbp-spmenu-left {
+		left: -340px;
+	}
+
+	.cbp-spmenu-right {
+		right: -340px;
+	}
+
+	.cbp-spmenu-left.cbp-spmenu-open {
+		left: 0px;
+	}
+
+	.cbp-spmenu-right.cbp-spmenu-open {
+		right: 0px;
+	}
+
+
+	.cbp-spmenu-push {
+		overflow-x: hidden;
+		position: relative;
+		left: 0;
+	}
+
+	.cbp-spmenu-push-toright {
+		left: 340px;
+		position:fixed;
+		width: 100%;
+	}
+
+	.cbp-spmenu-push-toleft {
+		left: -340px;
+
+	}
+
+	/* Transitions */
+
+	.cbp-spmenu,
+	.cbp-spmenu-push {
+		-webkit-transition: all 0.3s ease;
+		-moz-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+	}
+
+
+	@media screen and (max-height: 26.375em){
+
+		.cbp-spmenu-vertical {
+			font-size: 90%;
+			width: 190px;
+		}
+
+		.cbp-spmenu-left,
+		.cbp-spmenu-push-toleft {
+			left: -190px;
+		}
+	}
+/* --- MENU LEFT END --- */
+
+
+/* --- UI START --- */
+	.ui-datepicker {
+		width: 90% !important;
+		padding: none !important; 
+	}
+	.ui-widget-content {
+		border: none !important;
+	}
+	.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+		border-radius: inherit !important; 
+	}
+	.ui-state-default {
+		height: 31px;
+		width: 100%;
+		margin: 0px !important;
+		line-height: 30px;
+		background: none !important;
+	}
+
+	.ui-datepicker td, .ui-datepicker td span, .ui-datepicker td a {
+		padding: 0px !important;
+		margin: none !important;
+		text-align: center !important;
+	}
+	.ui-widget-header {
+		border: none !important;
+		background: #f5f5f5 !important;
+		color: #999 !important;
+		font-weight: 500 !important;
+		font-size: 14px !important;
+	}
+
+	.ui-datepicker-prev span {
+		background: url(gfx/arrow-left.png) no-repeat !important;
+		margin-top: -4px !important;
+	}
+	.ui-datepicker-next span {
+		background: url(gfx/arrow-right.png) no-repeat !important;
+		margin-top: -4px !important;
+	}
+
+	.ui-state-hover {
+		background: #d47970 !important;
+	}
+
+	.ui-state-default {
+		border: none !important; 
+		font-weight: normal!important;
+
+	}
+	.ui-state-highlight {
+		color: #c24033 !important;
+		border: 1px solid #c24033 !important;
+		border-radius: 50px;
+	}
+
+	.ui-state-active {
+		color: #fff !important;
+		background: #c24033 !important;
+		/*border-radius: 50px;*/
+	}
+	.ui-datepicker th {
+		font-weight: normal !important;
+		color: #c24033 !important;
+		text-transform: uppercase;
+	}
+	.ui-datepicker-title {
+		line-height: 30px !important;
+	}
+	.ui-datepicker-week-col {
+		border-right: solid 1px #ccc !important;
+		width: 24px;
+	}
+/* --- UI END --- */
+
+/* Kun til test */
+
+.event:nth-child(1) {
+	 background-color: #c0392b;
 }
-.weekdaybody:last-child {
-	border-right: 1px solid #ddd;
+.event:nth-child(2) {
+	 background-color: #3498db;
 }
-.weekdaybody .weekday {
-	color: #000;
-	border-bottom: 1px solid #ddd;
-	padding: 0 10px 0 0;
-	font-size: 16px;
-	position: relative;
-	height: 6.1%;
-	background: url(gfx/halfHourDivider.png) center center repeat-x;
-}
-.highlight {
-	background: #ededed !important;
-}
-.weekdaybody .weekday:first-child {
-	line-height: 36px;
-	background: none;
+.event:nth-child(3) {
+	 background-color: #0dccc0;
 }
 
-/* iPhone Portrait */
-@media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
+.only-phone {
+		display: none;
 }
-</style>
+
+/* Kun til test slut */
+
+
+
+/* Elements Start */
+	input#toggle, input#toggle2 {
+		max-height: 0;
+		max-width: 0;
+		opacity: 0;
+	}
+	
+	input#toggle + label, input#toggle2 + label {
+		display: block;
+		position: relative;
+		box-shadow: inset 0 0 0px 1px #d5d5d5;
+		text-indent: -5000px;
+		height: 30px;
+		width: 50px;
+		border-radius: 15px;
+		background: #fff;
+	}
+	
+	input#toggle + label:before, input#toggle2 + label:before {
+		content: "";
+		position: absolute;
+		display: block;
+		height: 30px;
+		width: 30px;
+		top: 0;
+		left: 0;
+		border-radius: 15px;
+		background: rgba(19,191,17,0);
+		-webkit-transition: .15s ease-in-out;
+	}
+	
+	input#toggle + label:after, input#toggle2 + label:after {
+		content: "";
+		position: absolute;
+		display: block;
+		height: 30px;
+		width: 30px;
+		top: 0;
+		left: 0px;
+		border-radius: 15px;
+		background: white;
+		box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.2);
+		-webkit-transition: .15s ease-in-out;
+	}
+	
+	input#toggle:checked + label:before, input#toggle2:checked + label:before {
+		width: 50px;
+		background: rgba(19,191,17,1);
+	}
+	
+	input#toggle:checked + label:after, input#toggle2:checked + label:after {
+		left: 20px;
+		box-shadow: inset 0 0 0 1px rgba(19,191,17,1), 0 2px 4px rgba(0,0,0,.2);
+	}
+	
+/* Elements End */
+
+
+@media (max-width:320px) { /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */ }
+@media (max-width:480px) { /* smartphones, Android phones, landscape iPhone */ 
+	.weekdaybody .weekday {
+		font-size: 10px;
+	}
+}
+@media (max-width:600px) { /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */ }
+@media (max-width:801px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+	.sidebar {
+		width: 100% !important;
+		margin: 0 auto !important;
+	}
+	.weekdaybody .weekday {
+		font-size: 12px;
+	}
+}
+
+
+@media (max-width:1281px){ /* big landscape tablets, laptops, and desktops */ 
+	.calendarbody {
+		width: 100%;
+		min-width: none;
+		float: left;
+	}
+	.sidebar {
+		width: 80%;
+		float: left;
+		margin: 0 10%;
+		height: auto;
+		min-width: none !important;		
+		min-height: none !important;
+	}
+	.ui-datepicker {
+		height: 400px !important;
+	}	
+	.ui-datepicker td, .ui-datepicker td span, .ui-datepicker td a {
+		padding: 8px !important;
+	}
+
+	.add-event {
+		font-size: 40px;
+	}
+
+	.add-event input, select {
+		font-size: 40px;
+		padding: 14px 0px 14px 35px;
+	}
+
+	.menu-inner-right h1, h2 {
+		font-size: 45px;
+	}	
+
+	input#toggle + label, input#toggle2 + label {
+		height: 90px;
+		width: 150px;
+		border-radius: 45px;
+	}
+	
+	input#toggle + label:before, input#toggle2 + label:before {
+		height: 90px;
+		width: 90px;
+		border-radius: 45px;
+	}
+	
+	input#toggle + label:after, input#toggle2 + label:after {
+		height: 90px;
+		width: 90px;
+		border-radius: 45px;
+		background: white;
+	}
+	
+	input#toggle:checked + label:before, input#toggle2:checked + label:before {
+		width: 150px;
+	}
+	
+	input#toggle:checked + label:after, input#toggle2:checked + label:after {
+		left: 60px;
+	}
+
+	.cbp-spmenu-top {
+		width: 90%;
+		font-size: 50px;
+		padding: 0px 5%;
+	}
+
+}
+@media (min-width:1281px) and (max-width: 1920px) { /* hi-res laptops and desktops */
+	.ui-datepicker {
+		width: 100% !important;
+		zoom:.7 !important;
+		font-weight: bold;
+		
+	}	
+	.hasDatepicker {
+		font-size: 85% !important
+	}
+}
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) { 
+	.cbp-spmenu-left {
+		left: -980px;
+	}
+
+	.cbp-spmenu-right {
+		right: -980px;
+	}
+
+	.cbp-spmenu-push-toright {
+		left: 980px;
+	}
+
+	.cbp-spmenu-push-toleft {
+		left: -980px;
+	}
+	.cbp-spmenu {
+		width: 980px;
+	}	
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) { 
+	.cbp-spmenu-left {
+		left: -980px;
+	}
+
+	.cbp-spmenu-right {
+		right: -980px;
+	}
+
+	.cbp-spmenu-push-toright {
+		left: 980px;
+	}
+
+	.cbp-spmenu-push-toleft {
+		left: -980px;
+	}
+	.cbp-spmenu {
+		width: 980px;
+	}	
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px) { 
+	.only-phone {
+		display: block;
+	}
+}
+
+input, select {
+    -webkit-appearance: none;
+    border-radius: 0;
+    background: #fff;
+}
