@@ -35,7 +35,7 @@ for ($i = 0; $i < 7; $i++) {
  
     $weekdaybody_html_var = "<div class='weekdaybody'>";
     
-
+    
             foreach ($jsonDecode['events'] as $event) { 
 
             $dateYearStart      = intval($event["start"][0]);
@@ -59,6 +59,8 @@ for ($i = 0; $i < 7; $i++) {
             $duration = $endPos-$startPos;
 
             $eventTitleCssClass = substr(str_replace(' ', '', $eventTitle), 0, -4);
+
+            
 
             $jsonDateValidate = $dateYearStart.$dateMonthStart.$dateDayStart;
                 if($jsonDateValidate == $currentDateValidate){

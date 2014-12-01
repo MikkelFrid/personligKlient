@@ -15,9 +15,12 @@
 			return $obj;
 		}
 		public $overallID;
-		public $email;
-		public $password;
-		public $isAdmin;
+		public $eventTitle;
+		public $eventLocation;
+		public $eventStartDate;
+		public $eventEndDate;
+		public $eventShareWith;
+		public $eventCalendar;
 	}
 
 

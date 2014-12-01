@@ -25,7 +25,6 @@ function tcpConnect($input){
 
 	socket_set_option($socket,SOL_SOCKET, SO_RCVTIMEO, array("sec"=>2, "usec"=>0));
 
-
 	$reply = '';
 	while(true) {
 	    $chunk = @socket_read($socket, 10000);

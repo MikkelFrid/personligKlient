@@ -30,27 +30,82 @@ $( document ).ready(function() {
 				break;
 		}
 	});
-/*
-	// Event 
-	var eventJson = $.parseJSON('{"activityid":"BINTO1067U_LA_E14","eventid":"BINTO1067U_LA_E14_714ff8c1a1d8f5e918829fef3ff92a0f_23e125dbca8f1d6655b7a40a77481a82","type":"Exercise","title":"BINTO1067U.LA_E14","description":"Distribuerede systemer (LA)","start":["2014",8,"15","8","00"],"end":["2014",8,"15","9","40"],"location":"SP213"}');
-	//console.log(eventJson.description);
-	var dateDayStart		= parseInt(eventJson.start[2]);
-	var dateTimeStartHour	= parseInt(eventJson.start[3]);
-	var dateTimeStartMin	= parseInt(eventJson.start[4]);
 
-	var dateDayEnd 			= parseInt(eventJson.end[2]);
-	var dateTimeEndHour		= parseInt(eventJson.end[3]);
-	var dateTimeEndMin		= parseInt(eventJson.end[4]);
+	$(function(){
+		 $("#createCalendar").click(function() {
+			$(".add-event").css("opacity","0"); 
+			$(".add-event-button").css("opacity","0"); 					
+			
+			setTimeout(
+				  function() 
+				  {
+				    $(".add-event").css("display","none"); 
+				    $(".add-event-button").css("display","none"); 
 
-	var startPos = ((dateTimeStartHour-8) * 60) + dateTimeStartMin+60;
-	var endPos = ((dateTimeEndHour-8) * 60) + dateTimeEndMin+60;
-	var duration = endPos-startPos;
+					$(".add-calendar").css("opacity","1"); 
+					$(".add-calendar-button").css("opacity","1"); 	
+					$(".add-calendar").css("display","block"); 
+					$(".add-calendar-button").css("display","block"); 					    
+				  }, 500);
+		 });
+	});
 
+	$(function(){
+		 $("#createEvent").click(function() {
+			$(".add-calendar").css("opacity","0"); 
+			$(".add-calendar-button").css("opacity","0"); 					
+			
+			setTimeout(
+				  function() 
+				  {
+				    $(".add-calendar").css("display","none"); 
+				    $(".add-calendar-button").css("display","none"); 
 
+					$(".add-event").css("opacity","1"); 
+					$(".add-event-button").css("opacity","1"); 	
+					$(".add-event").css("display","block"); 
+					$(".add-event-button").css("display","block"); 					    
+				  }, 500);
+		 });
+	});	
 
-	console.log(startPos);
-	console.log(endPos);
-	console.log(duration);
-*/
+	$(function(){
+	    $("#add-event").submit(function(e) {       
+	    	e.preventDefault();
+
+	    	$eventTitle 	= $("#add-event #title").val();
+	    	$eventLoc   	= $("#add-event #location").val();
+	    	$eventDateStart = $("#add-event #dateStart").val() + " " + $("#add-event #startTime").val() + ".00";
+	    	$eventDateEnd   = $("#add-event #dateEnd").val() + " " + $("#add-event #endTime").val() + ".00";
+	    	$eventDes 	    = $("#add-event #description").val();
+	    	$eventType	    = $("#add-event #type").val();
+	    	$eventCal	    = $("#add-event #calendar").val();
+
+	    	console.log($eventDateStart);
+	    	console.log($eventDateEnd);
+
+			$.ajax({
+			   url: 'newEventAjax.php',
+			   data: {
+				  	title : $eventTitle,
+				 	location : $eventLoc,
+					startDate : $eventDateStart,
+				  	endDate : $eventDateEnd,
+					type : $eventType,
+				 	calendar : $eventCal,
+ 					description : $eventDes 
+			   },
+			   error: function() {
+			      alert('An error has occurred. Please try again.');
+			   },
+			   success: function(data) {
+			   	  alert(data);
+			   },
+			   type: 'POST'
+			});
+
+	    });
+	});
+
 });
 

@@ -2,12 +2,13 @@
 
 session_start();
 
-if(!isset($_SESSION['userLoggedIn'])){
+if(!isset($_SESSION['user']['userLoggedIn'])){
     header("Location: login.php");
 }
 
 include 'tcpConnection.php';
 include 'events.php';
+
 
 ?>
 
@@ -32,8 +33,6 @@ include 'events.php';
 
 		<div class="menu-inner-left">
 
-            <a href="logout.php"><h2>Log Out</h2></a>
-
             <h2>Show Weather</h2>
             <input type="checkbox" name="toggle" id="toggle">
             <label for="toggle"></label>
@@ -41,7 +40,10 @@ include 'events.php';
             <h2>Show Quote of the Day</h2>
             <input type="checkbox" name="toggle2" id="toggle2">
             <label for="toggle2"></label>
-		
+
+            <br>
+            <br>
+            <a class="logout" href="logout.php">Log Out</a>		    
 		</div>
 	</nav>
 
@@ -50,37 +52,60 @@ include 'events.php';
         <div class="cbp-spmenu-top" style="margin-left: -1px;">Add Event:</div>
 
         <div class="menu-inner-right">
-                <form class="add-event" action="action_page.php">
-                    <input type="text" value="Title" onfocus="if (this.value=='Title') this.value='';" onblur="if (this.value=='') this.value='Title';"/>
-                    <div class="seperator"></div>
-                    <input type="text" value="Location" onfocus="if (this.value=='Location') this.value='';" onblur="if (this.value=='') this.value='Location';"/>
 
-                    <br><br>
+            <button id="createCalendar" class="add-event-button">Add / Delete Calendar</button>
+                    <form class="add-event" action="action_page.php" id="add-event">
+                        <br>
+                        <input type="text" id="title" value="Title" onfocus="if (this.value=='Title') this.value='';" onblur="if (this.value=='') this.value='Title';"/>
+                        <div class="seperator"></div>
+                        <input type="text" id="location" value="Location" onfocus="if (this.value=='Location') this.value='';" onblur="if (this.value=='') this.value='Location';"/>
 
-                    <span>Start Time</span><input class="date" type="date" name="startDate" value="<?php echo date("Y-n-d"); ?>"><input class="time" type="time" name="startTime" value="<?php echo date("G:00"); ?>">
-                    <div class="seperator"></div>
-                    <span>End Time</span><input class="date" type="date" name="endDate" value="<?php echo date("Y-n-d"); ?>"><input class="time" type="time" name="endTime" value="<?php echo date("G")+1; ?>:00">
+                        <br><br>
 
-                    <br><br>
+                        <span>Start Time</span><input class="date" id="dateStart" type="date" name="startDate" value="<?php echo date("Y-n-d"); ?>"><input class="time" id="startTime" type="time" name="startTime" value="<?php echo date("G:00"); ?>">
+                        <div class="seperator"></div>
+                        <span>End Time</span><input class="date" id="dateEnd" type="date" name="endDate" value="<?php echo date("Y-n-d"); ?>"><input class="time" id="endTime" type="time" name="endTime" value="<?php echo date("G")+1; ?>:00">
 
-                    <input type="text" value="Share With: (comma separated)" onfocus="if (this.value=='Share With: (comma separated)') this.value='';" onblur="if (this.value=='') this.value='Share With: (comma separated)';"/>
+                        <!-- <br><br>
 
-                    <br><br>
+                        <input type="text" id="shareWith" value="Share With: (comma separated)" onfocus="if (this.value=='Share With: (comma separated)') this.value='';" onblur="if (this.value=='') this.value='Share With: (comma separated)';"/> -->
 
-                    <span>Calendar:</span>
-                    <select class="select">
-                        <option value="1">Personal</option>
-                        <option value="2">Study Group</option>
-                        <option value="3">Custom Group 1</option>
-                        <option value="4">Custom Group 2</option>
-                    </select><br><br>
+                        <br><br>
 
-                    <script type="text/javascript">
+                        <textarea type="text" id="description" rows="3" value="Descrpition" onfocus="if (this.value=='Descrpition') this.value='';" onblur="if (this.value=='') this.value='Descrpition';"/></textarea>
 
-                    </script>
+                        <br><br>
 
-                    <input type="submit" class="submit" value="Add Event"> 
-                </form>
+                        <span>Type:</span>
+                        <select class="select" id="type">
+                            <option value="0">Lecture</option>
+                            <option value="1">Exercise</option>
+                            <option value="2">Other</option>
+                        </select><br><br>                    
+
+                        <span>Calendar:</span>
+                        <select class="select" id="calendar">
+                            <option value="1">Personal</option>
+                            <option value="2">Study Group</option>
+                            <option value="3">Custom Group 1</option>
+                            <option value="4">Custom Group 2</option>
+                        </select><br><br>
+
+                        <input type="submit" class="submit" value="Add Event"> 
+                    </form>
+
+        <button id="createEvent" class="add-calendar-button">Add / Delete Event</button>
+                    <form class="add-calendar" action="action_page.php" id="add-calendar">
+                        <br>
+                        <input type="text" id="title" value="Title" onfocus="if (this.value=='Title') this.value='';" onblur="if (this.value=='') this.value='Title';"/>
+                        <div class="seperator"></div>
+                        <input type="text" id="location" value="Location" onfocus="if (this.value=='Location') this.value='';" onblur="if (this.value=='') this.value='Location';"/>
+
+                        <br><br>                  
+
+                        <input type="submit" class="submit" value="Add Calendar"> 
+                    </form>                    
+
         </div>
     </nav>    
 	
@@ -178,8 +203,6 @@ for ($i = 0; $i < 7; $i++) {
             $duration = $endPos-$startPos;
 
             $eventTitleCssClass = str_replace(' ', '', $eventTitle);
-
-
 
             $jsonDateValidate = $dateYearStart.$dateMonthStart.$dateDayStart;
                 if($jsonDateValidate == $currentDateValidate){

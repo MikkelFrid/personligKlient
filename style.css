@@ -15,8 +15,19 @@
 
 	input[type="text"], textarea {
 
-	  background-color : #fff !important; 
+	  	background-color : #fff !important; 
+		font-size: 17px;
+		padding: 14px 0px 14px 10px;
+		color: #777;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		width: 100%;	  
 
+	}
+
+	textarea:focus, input:focus{
+    	outline: 0;
 	}
 
 	.header {
@@ -100,6 +111,21 @@
 		width: 50%;
 		color: #fff;
 		font-size: 21px;
+	}
+
+	.logout {
+		font-size: 17px;
+		width: 97%;
+		padding: 14px 0px 14px 0px;
+		color: #fff;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		background: #ff4c38;
+		float: left;
+		text-align: center;
+		text-decoration: none;	
+
 	}
 
 	.weekcontrol {
@@ -267,24 +293,70 @@
 		text-align: center;
 	}
 
+
 	.add-event /*form*/ {
 		font-size: 17px;
 		font-family: 'Open Sans', sans-serif;
+		opacity: 1;
+
+		-webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);		
 	}
+
+	.add-event-button {
+		font-size: 17px;
+		width: 70%;
+		margin: 0 15%;
+		padding: 14px 0px 14px 0px;
+		color: #fff;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		background: #ff4c38;
+
+		opacity: 1;
+		display: block;	
+		
+		-webkit-transition: opacity .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: opacity .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: opacity .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: opacity .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);		
+
+		-webkit-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);					
+	}
+
+	.add-event-button:hover {
+		font-size: 21px;			
+	}			
 
 	.add-event input, select /*form*/ {
 		font-size: 17px;
 		width: 100%;
-		padding: 14px 0px 14px 10px;
+		padding: 14px 0px 14px 0px;
 		color: #777;
 		border: none;
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 500;
+		
 	}
 
 	.add-event .submit /*form*/ {
 		background: #ff4c38;
 		color: #fff;
+
+		-webkit-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);					
+	}
+
+	.add-event .submit:hover {
+		font-size: 21px;			
 	}	
 
 	.add-event .date {
@@ -312,6 +384,89 @@
 	.add-event .seperator {
 		border-bottom: 1px solid #e6e6e6;
 	}
+
+	.add-calendar /*form*/ {
+		font-size: 17px;
+		font-family: 'Open Sans', sans-serif;
+		opacity: 0;
+		display: none;
+
+		-webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);		
+	}	
+
+	.add-calendar-button {
+		font-size: 17px;
+		width: 70%;
+		margin: 0 15%;
+		padding: 14px 0px 14px 10px;
+		color: #fff;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		background: #ff4c38;
+
+		opacity: 0;
+		display: none;	
+		
+		-webkit-transition: opacity .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: opacity .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: opacity .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: opacity .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);		
+
+		-webkit-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);					
+	}
+
+	.add-calendar-button:hover {
+		font-size: 24px;			
+	}	
+
+	.add-calendar input, select /*form*/ {
+		font-size: 17px;
+		width: 100%;
+		padding: 14px 0px 14px 10px;
+		color: #777;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		
+	}
+
+	.add-calendar .submit /*form*/ {
+		background: #ff4c38;
+		color: #fff;
+		-webkit-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);					
+	}
+
+	.add-calendar .submit:hover {
+		font-size: 24px;			
+	}		
+
+
+	.add-calendar .select {
+		width: 70%;
+	}	
+
+	.add-calendar span {
+		width: 24%;
+		float: left;
+		background: #fff;
+		padding: 15px 3% 15px;
+		color: #777;
+	}
+
+	.add-calendar .seperator {
+		border-bottom: 1px solid #e6e6e6;
+	}	
+
 
 /* --- BASIC SLUT --- */
 

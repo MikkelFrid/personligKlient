@@ -13,28 +13,34 @@ if($_POST){
 	$userInfo = new user();
 
 	$userInfo->overallID = "logIn";
-	$userInfo->email = $username;
-	$userInfo->password = $password;
-	$userInfo->isAdmin = "false";
+	$userInfo->email 	 = $username;
+	$userInfo->password  = $password;
+	$userInfo->isAdmin   = "false";
 
 	$userAction = tcpConnect($userInfo);
+
+	//echo "<pre>" . $userAction . "</pre>";
 	
-	switch ($userAction) {
-		case 0:
-			$_SESSION['userLoggedIn'] = 1;
+	switch ($userAction[0]) {
+		case "0":
+			$_SESSION['user'] = array();
+			$_SESSION['user']['userLoggedIn'] = 1;
+			$_SESSION['user']['userID'] = $userAction[1];
+			
+			//echo $_SESSION['user']['userID'];
 			header("Location: month.php");
 
 			break;
 
-		case 3:
+		case "3":
 			$serverError = "Your password does not match the given username";
 			break;
 
-		case 2:
+		case "2":
 			$serverError = "Your user is not active";
 			break;
 
-		case 1:
+		case "1":
 			$serverError = "We did not recognize the given username. Please try again.";
 			break;						
 		
