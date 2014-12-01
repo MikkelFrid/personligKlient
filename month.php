@@ -1,3 +1,16 @@
+<?php 
+
+session_start();
+
+if(!isset($_SESSION['userLoggedIn'])){
+    header("Location: login.php");
+}
+
+include 'tcpConnection.php';
+include 'events.php';
+
+?>
+
 <html>
 <head>
 	<link href="style.css" rel="stylesheet" type="text/css">
@@ -18,6 +31,8 @@
 		<div class="cbp-spmenu-top">Settings</div>
 
 		<div class="menu-inner-left">
+
+            <a href="logout.php"><h2>Log Out</h2></a>
 
             <h2>Show Weather</h2>
             <input type="checkbox" name="toggle" id="toggle">
@@ -74,7 +89,9 @@
 <div class="addEvent-button" id="showRightPush"></div>
 <!-- Header med ugenummer  -->
 <div class="header">
-  CBS Calendar
+	<button class="prev-day weekcontrol">&#8592;</button>
+  	CBS Calendar
+ 	<button class="next-day weekcontrol">&#8594;</button>
 </div>
 
 <div class="sidebar">
@@ -82,10 +99,9 @@
 
 	<h2>Select Date:</h2>    
 	  	<center>
-            <div class="week-picker"></div>
+            <div class="week-picker" id="picker"></div>
             <br /><br />
             <label>Week :</label> <span id="startDate"></span> - <span id="endDate"></span>
-			<!-- <div style="font-size: 85%;" id="datepicker"></div> -->
 		</center>
 </div>
 
@@ -133,23 +149,13 @@ for ($i = 0; $i < 7; $i++) {
 
 
     // Tidskonvetering for event
-    $jsonString = "
-	    { \"events\": [
-		    {\"activityid\":\"BINTO1035U_XB_E14\",\"eventid\":\"BINTO1035U_XB_E14_7522cb9e2c47efa1e3ff6ac24002be36_99537c3adf3e04bc329ed38f0e58ce2e\",\"type\":\"Lecture\",\"title\":\"BINTO1035U.XB_E14\",\"description\":\"Makro\u00f8konomi (XB)\",\"start\":[\"2014\",11,\"19\",\"8\",\"00\"],\"end\":[\"2014\",11,\"19\",\"9\",\"40\"],\"location\":\"Ks71\"},
-			{\"activityid\":\"BINTO1035U_XB_E14\",\"eventid\":\"BINTO1035U_XB_E14_5eea61ae6c2d8824d340e3b57c52dc11_a48b708b5cdbd426b599420f90697a1f\",\"type\":\"Exercise\",\"title\":\"BINTO1035U.XB_E14\",\"description\":\"Makro\u00f8konomi (XB)\",\"start\":[\"2014\",11,\"19 \",\"11\",\"00\"],\"end\":[\"2014\",11,\"19\",\"12\",\"40\"],\"location\":\"SP114\"},
-			{\"activityid\":\"BINTO1035U_XB_E14\",\"eventid\":\"BINTO1035U_XB_E14_e523a307e38d3b09094746c6d679e683_087a51abc6bd219e13e0351601e0e1aa\",\"type\":\"Lecture\",\"title\":\"BINTO1035U.XB_E14\",\"description\":\"Makro\u00f8konomi (XB)\",\"start\":[\"2014\",11,\"22\",\"8\",\"00\"],\"end\":[\"2014\",11,\"22\",\"9\",\"40\"],\"location\":\"Ks71\"}
-		]}
-	";
+    $events = new events();
 
+    $jsonDecode = $events->getCBSCal();
 
-    //echo $startPos;
-    //echo $endPos;
-    //echo $duration;
     ?>
     <div class="weekdaybody">
         <?php 
-            $jsonDecode = json_decode($jsonString, true);
-
             foreach ($jsonDecode['events'] as $event) { 
 
             $dateYearStart      = intval($event["start"][0]);
@@ -163,23 +169,27 @@ for ($i = 0; $i < 7; $i++) {
             $dateTimeEndHour    = intval($event["end"][3]);
             $dateTimeEndMin     = intval($event["end"][4]);
 
+
+            $eventType      = $event["type"];
+            $eventTitle     = $event["description"];
+            $eventLocation  = $event["location"]; 
             $startPos = (($dateTimeStartHour-8) * 60) + $dateTimeStartMin+60;
             $endPos = (($dateTimeEndHour-8) * 60) + $dateTimeEndMin+60;
             $duration = $endPos-$startPos;
+
+            $eventTitleCssClass = str_replace(' ', '', $eventTitle);
+
 
 
             $jsonDateValidate = $dateYearStart.$dateMonthStart.$dateDayStart;
                 if($jsonDateValidate == $currentDateValidate){
                     ?>
-                    <div class="event" style="top: <?= $startPos; ?>px; height: <?= $duration; ?>;">
-                        <div class="event-header">8:00 - 9:40</div>
+                    <div class="event <?php echo $eventTitleCssClass; ?>" style="top: <?= $startPos; ?>px; height: <?= $duration; ?>;">
+                        <div class="event-header"><?= str_pad($dateTimeStartHour, 2, '0', STR_PAD_LEFT); ?>:<?= str_pad($dateTimeStartMin, 2, '0', STR_PAD_LEFT); ?> - <?= str_pad($dateTimeEndHour, 2, '0', STR_PAD_LEFT); ?>:<?= str_pad($dateTimeEndMin, 2, '0', STR_PAD_LEFT); ?></div>
 
-                        <span class="event-course">Makroøkonomi (XB)</span><br>
-                        <span class="event-type">Lecture</span><br>
-                        <span class="event-location">SP213</span><br>
-
-                        <span class="starttime"><?= $startPos; ?></span>
-                        <span class="duration"><?= $duration; ?></span>
+                        <span class="event-course"><?= $eventTitle; ?></span><br>
+                        <span class="event-type"><?= $eventType; ?></span><br>
+                        <span class="event-location"><?= $eventLocation; ?></span><br>
                     </div>
                     <?php
                 }
@@ -209,7 +219,7 @@ for ($i = 0; $i < 7; $i++) {
 </div>
 
 <div class="footer">
-	Sidst redigeret d. 21-11-2014 af Mikkel
+	Copenhagen Business School &copy;  <?php echo date("Y") ?> 
 </div>
 
 <script src="js/menu-left.js"></script>

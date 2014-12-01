@@ -1,20 +1,48 @@
 <?php
-include("encryption.php");
+include("xor.php");
+include 'user.php';
 
-$tis = "DetteErEnTest";
+error_reporting(E_ALL);
 
-$tis = x_Encrypt($tis, "17");
-echo $tis;
+function tcpConnect($input){
+	/* Get the port for the WWW service. */
+	$service_port = 8888;
 
-$fp = fsockopen("localhost", 8888, $errno, $errstr, 30);
-if (!$fp) {
-    echo "$errstr ($errno)<br />\n";
-} else {
-    fwrite($fp, "test");
-    while (!feof($fp)) {
-        echo fgets($fp, 128);
-    }
-    fclose($fp);
+	/* Get the IP address for the target host. */
+	$address = gethostbyname('localhost');
+
+	/* Create a TCP/IP socket. */
+	$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP); 
+
+	$result = socket_connect($socket, $address, $service_port);
+
+	$json = json_encode((array)$input);
+
+	$in = encrypt_str($json);
+	$out = '';
+
+	socket_write($socket, $in, strlen($in));
+
+	socket_set_option($socket,SOL_SOCKET, SO_RCVTIMEO, array("sec"=>2, "usec"=>0));
+
+
+	$reply = '';
+	while(true) {
+	    $chunk = @socket_read($socket, 10000);
+
+	    if (strlen($chunk) == 0) {
+	        // no more data
+	        break;
+	    }
+	    $reply .= $chunk;
+	}
+
+	return $reply;
+
+	socket_close($socket);
 }
+
+
+//echo tcpConnect($userInfo);
 
 ?>
