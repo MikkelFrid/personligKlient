@@ -66,10 +66,6 @@ include 'events.php';
                         <div class="seperator"></div>
                         <span>End Time</span><input class="date" id="dateEnd" type="date" name="endDate" value="<?php echo date("Y-n-d"); ?>"><input class="time" id="endTime" type="time" name="endTime" value="<?php echo date("G")+1; ?>:00">
 
-                        <!-- <br><br>
-
-                        <input type="text" id="shareWith" value="Share With: (comma separated)" onfocus="if (this.value=='Share With: (comma separated)') this.value='';" onblur="if (this.value=='') this.value='Share With: (comma separated)';"/> -->
-
                         <br><br>
 
                         <textarea type="text" id="description" rows="3" value="Descrpition" onfocus="if (this.value=='Descrpition') this.value='';" onblur="if (this.value=='') this.value='Descrpition';"/></textarea>
@@ -98,10 +94,12 @@ include 'events.php';
                     <form class="add-calendar" action="action_page.php" id="add-calendar">
                         <br>
                         <input type="text" id="title" value="Title" onfocus="if (this.value=='Title') this.value='';" onblur="if (this.value=='') this.value='Title';"/>
-                        <div class="seperator"></div>
-                        <input type="text" id="location" value="Location" onfocus="if (this.value=='Location') this.value='';" onblur="if (this.value=='') this.value='Location';"/>
 
                         <br><br>                  
+
+                        <input type="text" id="sharedto" value="Share With: (comma separated)" onfocus="if (this.value=='Share With: (comma separated)') this.value='';" onblur="if (this.value=='') this.value='Share With: (comma separated)';"/>   
+
+                        <br><br>                   
 
                         <input type="submit" class="submit" value="Add Calendar"> 
                     </form>                    

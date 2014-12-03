@@ -1,4 +1,3 @@
-
 $( document ).ready(function() {
 
 
@@ -81,9 +80,6 @@ $( document ).ready(function() {
 	    	$eventType	    = $("#add-event #type").val();
 	    	$eventCal	    = $("#add-event #calendar").val();
 
-	    	console.log($eventDateStart);
-	    	console.log($eventDateEnd);
-
 			$.ajax({
 			   url: 'newEventAjax.php',
 			   data: {
@@ -103,9 +99,41 @@ $( document ).ready(function() {
 			   },
 			   type: 'POST'
 			});
+	    });
+
+	$(function(){
+	    $("#add-calendar").submit(function(e) {       
+	    	e.preventDefault();
+
+	    	$calendarTitle 			= $("#add-calendar #title").val();
+	    	$calendarsharedto	  	= $("#add-calendar #sharedto").val();
+
+	    	if($calendarsharedto == "Share With: (comma separated)"){
+				$privatePublicYesNo = "2";
+				$calendarsharedto = null;
+	    	}else{
+	    		$privatePublicYesNo = "1";
+	    	}
+	    	
+
+			$.ajax({
+			   url: 'newCalendarAjax.php',
+			   data: {
+				  	title : $calendarTitle,
+				 	sharedto : $calendarsharedto,
+				 	privatPublic : $privatePublicYesNo
+			   },
+			   error: function() {
+			      alert('An error has occurred. Please try again.');
+			   },
+			   success: function(data) {
+			   	  alert(data);
+			   },
+			   type: 'POST'
+			});
 
 	    });
 	});
 
 });
-
+});
