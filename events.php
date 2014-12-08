@@ -1,5 +1,8 @@
 <?php 
 
+	include "getNewEvent.php";
+	include 'tcpConnection.php';
+
 	class events{
 
 		function getCBSCal(){
@@ -14,6 +17,13 @@
 
 			return $obj;
 		}
+		function getDBCal($calID){
+			$calendar = new getNewEvent();
+			$calendar->CalenderID = $calID;
+
+			return tcpConnect($calendar);
+		}
+
 		public $overallID;
 		public $eventTitle;
 		public $eventLocation;

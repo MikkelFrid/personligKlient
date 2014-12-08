@@ -23,7 +23,7 @@ function tcpConnect($input){
 
 	socket_write($socket, $in, strlen($in));
 
-	socket_set_option($socket,SOL_SOCKET, SO_RCVTIMEO, array("sec"=>2, "usec"=>0));
+	socket_set_option($socket,SOL_SOCKET, SO_RCVTIMEO, array("sec"=>1, "usec"=>0));
 
 	$reply = '';
 	while(true) {

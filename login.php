@@ -25,6 +25,7 @@ if($_POST){
 		case "0":
 			$_SESSION['user'] = array();
 			$_SESSION['user']['userLoggedIn'] = 1;
+			$_SESSION['user']['username'] = $username;
 			$_SESSION['user']['userID'] = $userAction[1];
 			
 			//echo $_SESSION['user']['userID'];
@@ -63,7 +64,6 @@ if($_POST){
 	</div>
 
 	<?php if(isset($serverError)){ ?>
-
 
 		<div class="login">
 			<form action="" method="POST">

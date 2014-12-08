@@ -13,6 +13,10 @@
 		margin: 20px 0px 0px;
 	}
 
+	textarea {
+	   resize: none;
+	}
+
 	input[type="text"], textarea {
 
 	  	background-color : #fff !important; 
@@ -28,6 +32,15 @@
 
 	textarea:focus, input:focus{
     	outline: 0;
+	}
+
+	.loading {
+		background: url(gfx/loading.gif) ;
+		opacity: 0;
+		display: none;
+		height: 106px;
+		width: 106px;
+		margin-top:20px;	
 	}
 
 	.header {
@@ -235,6 +248,92 @@
 		background: #ededed !important;
 	}
 
+	.notebox {
+		margin: 0px;
+		height: 50px;
+		width: 100%;
+		border-bottom: 1px #ccc solid;
+		padding: 4px;
+		font-size: 14px;
+		color: #000;
+	}
+
+	.note-form{
+		margin: 0;
+	}	
+
+	.note-form-event{
+		border-left: 1px solid #9E9E9E;
+		border-right: 1px solid #9E9E9E;
+		border-bottom: 1px solid #9E9E9E;
+		width: 80%;
+		margin: 0px 10% 0 10%;
+		position: absolute;
+		bottom: -78px;
+		display: none;
+		opacity: 0;
+
+		-webkit-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);			
+	}
+
+	.note-button {
+		font-size: 14px;
+		width: 100%;
+		margin: 0;
+		padding: 4px 0px 4px 0px;
+		color: #fff;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		background: #ff4c38;
+
+		-webkit-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: font-size .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);			
+	}
+
+	.note-button:hover {
+		font-size: 16px;
+	}	
+
+	.note-list {
+		margin: 0px;
+		position: absolute;
+		bottom: -185px;
+		font-size: 13px;
+		width: 80%;
+		padding-left: 20%;
+		text-align: left;
+		height: 100px;
+		opacity: 0;
+		display: none;
+
+		-webkit-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);			
+	}
+
+	.note-delete-submit{
+		color:#ff4c38;
+		border: 1px solid #ff4c38;
+		border-radius: 40px;
+		height:15px;
+		width: 15px;
+		font-size: 12px;
+		padding: 0;
+	}
+
+	.note-delete-form {
+		position: absolute;
+		left: 6%;
+		margin-top: -15px;
+	}
+
 	.event {
 		 background-color: #c0392b; width: 100%; z-index:99; position: absolute;
 	}
@@ -257,8 +356,10 @@
 
 	.event-type {
 		color: #fff;
-		font-size: 13px;
-		line-height: 16px;
+		bottom: 2px;
+		position: absolute;
+		left: 5px;
+		font-size: 12px;
 	}
 
 	.event-location {
@@ -285,7 +386,7 @@
 		position:fixed;
 		bottom:0;
 		left:0;
-		height:30px;
+		height:60px;
 		background-color:rgba(255, 255, 255, 0.5);
 		color: #fff;
 		width: 100%;
@@ -293,6 +394,15 @@
 		text-align: center;
 	}
 
+	.qotd {
+		opacity: 1;
+		display: block;
+
+		-webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);	
+	}
 
 	.add-event /*form*/ {
 		font-size: 17px;
@@ -332,12 +442,14 @@
 
 	.add-event-button:hover {
 		font-size: 21px;			
-	}			
+	}	
+
+
 
 	.add-event input, select /*form*/ {
 		font-size: 17px;
 		width: 100%;
-		padding: 14px 0px 14px 0px;
+		padding: 14px 0px 14px 10px;
 		color: #777;
 		border: none;
 		font-family: 'Open Sans', sans-serif;
@@ -384,6 +496,42 @@
 	.add-event .seperator {
 		border-bottom: 1px solid #e6e6e6;
 	}
+
+	.delete-event /*form*/ {
+		font-size: 17px;
+		font-family: 'Open Sans', sans-serif;
+		opacity: 1;
+
+		-webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);		
+	}
+
+	.delete-event input, select /*form*/ {
+		font-size: 17px;
+		width: 100%;
+		padding: 14px 0px 14px 10px;
+		color: #777;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		
+	}	
+	
+	.delete-event .submit /*form*/ {
+		background: #ff4c38;
+		color: #fff;
+
+		-webkit-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);					
+	}
+
+	.delete-event .submit:hover {
+		font-size: 21px;			
+	}	
 
 	.add-calendar /*form*/ {
 		font-size: 17px;
@@ -467,6 +615,41 @@
 		border-bottom: 1px solid #e6e6e6;
 	}	
 
+	.delete-calendar /*form*/ {
+		font-size: 17px;
+		font-family: 'Open Sans', sans-serif;
+		opacity: 0;
+		display: none;
+
+		-webkit-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);		
+	}	
+
+	.delete-calendar input, select /*form*/ {
+		font-size: 17px;
+		width: 100%;
+		padding: 14px 0px 14px 10px;
+		color: #777;
+		border: none;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 500;
+		
+	}
+
+	.delete-calendar .submit /*form*/ {
+		background: #ff4c38;
+		color: #fff;
+		-webkit-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-moz-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		-o-transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);					
+	}
+
+	.delete-calendar .submit:hover {
+		font-size: 24px;			
+	}	
 
 /* --- BASIC SLUT --- */
 
@@ -730,12 +913,12 @@
 	input#toggle + label, input#toggle2 + label {
 		display: block;
 		position: relative;
-		box-shadow: inset 0 0 0px 1px #d5d5d5;
+		box-shadow: inset 0 0 0 1px rgba(19,191,17,1), 0 2px 4px rgba(0,0,0,.2);
 		text-indent: -5000px;
 		height: 30px;
 		width: 50px;
 		border-radius: 15px;
-		background: #fff;
+		background: rgba(19,191,17,1);
 	}
 	
 	input#toggle + label:before, input#toggle2 + label:before {
@@ -745,9 +928,11 @@
 		height: 30px;
 		width: 30px;
 		top: 0;
-		left: 0;
+		right: 0px;
 		border-radius: 15px;
-		background: rgba(19,191,17,0);
+		background: white;
+		box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.2);
+		
 		-webkit-transition: .15s ease-in-out;
 	}
 	
@@ -758,21 +943,22 @@
 		height: 30px;
 		width: 30px;
 		top: 0;
-		left: 0px;
+		left: 20px;
 		border-radius: 15px;
 		background: white;
 		box-shadow: inset 0 0 0 1px rgba(0,0,0,.2), 0 2px 4px rgba(0,0,0,.2);
-		-webkit-transition: .15s ease-in-out;
+		
+		-webkit-transition: .15s ease-in-out;		
 	}
 	
 	input#toggle:checked + label:before, input#toggle2:checked + label:before {
 		width: 50px;
-		background: rgba(19,191,17,1);
+		background:#fff;
 	}
 	
 	input#toggle:checked + label:after, input#toggle2:checked + label:after {
-		left: 20px;
-		box-shadow: inset 0 0 0 1px rgba(19,191,17,1), 0 2px 4px rgba(0,0,0,.2);
+		left: 0px;
+		box-shadow: inset 0 0 0px 1px #d5d5d5;
 	}
 	
 /* Elements End */

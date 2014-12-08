@@ -49,18 +49,18 @@ $(function() {
     $('.week-picker .ui-datepicker-calendar tr').on('mousemove', function() { $(this).find('td a').addClass('ui-state-hover'); });
     $('.week-picker .ui-datepicker-calendar tr').on('mouseleave', function() { $(this).find('td a').removeClass('ui-state-hover'); });
 
-    // evntuelt!
-    $('#picker').datepicker();
+    // // evntuelt!
+    // $('#picker').datepicker();
 
-    $('.next-day').on("click", function () {
-        var date = $('#picker').datepicker('getDate');
-        date.setTime(date.getTime() + (1000*60*60*24)*7)
-        $('#picker').datepicker("setDate", date);
-    });
+    // $('.next-day').on("click", function () {
+    //     var date = $('#picker').datepicker('getDate');
+    //     date.setTime(date.getTime() + (1000*60*60*24)*7)
+    //     $('#picker').datepicker("setDate", date);
+    // });
 
-    $('.prev-day').on("click", function () {
-        var date = $('#picker').datepicker('getDate');
-        date.setTime(date.getTime() - (1000*60*60*24)*7)
-        $('#picker').datepicker("setDate", date);
-    });
+    // $('.prev-day').on("click", function () {
+    //     var date = $('#picker').datepicker('getDate');
+    //     date.setTime(date.getTime() - (1000*60*60*24)*7)
+    //     $('#picker').datepicker("setDate", date);
+    // });
 });

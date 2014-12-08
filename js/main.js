@@ -1,17 +1,15 @@
 $( document ).ready(function() {
 
-
-   //
 	weekdayHideShow = "hide";
 
-	$(document).on("click", ".weekdaybody", function(e){
+	$(document).on("click", ".weekdaybody .weekday.no-bg", function(e){
 		switch(weekdayHideShow){
 			case "hide": 
 				weekdayHideShow = "show"
 		
 				$(".weekdaybody").css("display","none"); 
 
-				$(this).css({
+				$(this).parent(".weekdaybody").css({
 					"display" : "block", 
 					"width"   : "85%"
 				});
@@ -30,20 +28,80 @@ $( document ).ready(function() {
 		}
 	});
 
+	noteHideShow = "hide";
+
+	$(document).on("click", ".event .event-header", function(e){
+		switch(noteHideShow){
+			case "hide": 
+				noteHideShow = "show"
+		
+				$(this).parent(".event").find(".note-form-event").css("opacity","1");
+				$(this).parent(".event").find(".note-form-event").css("display","block");
+				
+				$(this).parent(".event").find(".note-list").css("opacity","1");
+				$(this).parent(".event").find(".note-list").css("display","block");
+
+				break;
+
+			case "show": 
+				noteHideShow = "hide"
+
+				$(this).parent(".event").find(".note-form-event").css("opacity","0");
+				$(this).parent(".event").find(".note-form-event").css("display","none");
+				
+				$(this).parent(".event").find(".note-list").css("opacity","0");
+				$(this).parent(".event").find(".note-list").css("display","none");
+
+
+				break;
+		}
+
+	});	
+
+	qotdHideShow = "hide";
+
+	$(function(){
+		 $("#toggle2").click(function() {
+			switch(qotdHideShow){
+			case "hide": 
+				qotdHideShow = "show"
+		
+				$(".qotd").css("display","none"); 
+				$(".qotd").css("opacity","0"); 
+
+				break;
+
+			case "show": 
+				qotdHideShow = "hide"
+
+				$(".qotd").css("display","block"); 
+				$(".qotd").css("opacity","1"); 
+
+				break;
+		}
+		 });
+	});
+
+
 	$(function(){
 		 $("#createCalendar").click(function() {
 			$(".add-event").css("opacity","0"); 
-			$(".add-event-button").css("opacity","0"); 					
+			$(".delete-event").css("opacity","0"); 
+			$(".add-event-button").css("opacity","0"); 	
+
 			
 			setTimeout(
 				  function() 
 				  {
 				    $(".add-event").css("display","none"); 
+				    $(".delete-event").css("display","none"); 
 				    $(".add-event-button").css("display","none"); 
 
 					$(".add-calendar").css("opacity","1"); 
+					$(".delete-calendar").css("opacity","1"); 
 					$(".add-calendar-button").css("opacity","1"); 	
 					$(".add-calendar").css("display","block"); 
+					$(".delete-calendar").css("display","block"); 
 					$(".add-calendar-button").css("display","block"); 					    
 				  }, 500);
 		 });
@@ -52,19 +110,37 @@ $( document ).ready(function() {
 	$(function(){
 		 $("#createEvent").click(function() {
 			$(".add-calendar").css("opacity","0"); 
+			$(".delete-calendar").css("opacity","0"); 
 			$(".add-calendar-button").css("opacity","0"); 					
 			
 			setTimeout(
 				  function() 
 				  {
 				    $(".add-calendar").css("display","none"); 
+				    $(".delete-calendar").css("display","none"); 
 				    $(".add-calendar-button").css("display","none"); 
 
 					$(".add-event").css("opacity","1"); 
+					$(".delete-event").css("opacity","1"); 
 					$(".add-event-button").css("opacity","1"); 	
 					$(".add-event").css("display","block"); 
+					$(".delete-event").css("display","block"); 
 					$(".add-event-button").css("display","block"); 					    
 				  }, 500);
+		 });
+	});	
+
+	$(function(){
+		 $("#add-gif").click(function() {
+			$(".loading").css("opacity","1");
+			$(".loading").css("display","block");
+
+			setTimeout(
+				  function() 
+				  {
+				  		$(".loading").css("opacity","0");
+						$(".loading").css("display","none");			    
+				  }, 2000);
 		 });
 	});	
 
@@ -110,7 +186,7 @@ $( document ).ready(function() {
 
 	    	if($calendarsharedto == "Share With: (comma separated)"){
 				$privatePublicYesNo = "2";
-				$calendarsharedto = null;
+				$calendarsharedto = " ";
 	    	}else{
 	    		$privatePublicYesNo = "1";
 	    	}
@@ -131,6 +207,16 @@ $( document ).ready(function() {
 			   },
 			   type: 'POST'
 			});
+
+			$(".loading").css("opacity","1");
+			$(".loading").css("display","block");
+
+			setTimeout(
+				  function() 
+				  {
+				  		$(".loading").css("opacity","0");
+						$(".loading").css("display","none");			    
+				  }, 2000);
 
 	    });
 	});
